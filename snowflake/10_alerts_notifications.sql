@@ -8,7 +8,7 @@ USE SCHEMA APP;
 CREATE OR REPLACE NOTIFICATION INTEGRATION aws_indonesia_islamic_finance_takaful_EMAIL_INT
   TYPE = EMAIL
   ENABLED = TRUE
-  ALLOWED_RECIPIENTS = ('jonathan.asvestis@snowflake.com');
+  ALLOWED_RECIPIENTS = ('<YOUR_EMAIL>');
 
 -- Alert: COMBINED_RATIO_ALERT
 CREATE OR REPLACE ALERT APP.COMBINED_RATIO_ALERT
@@ -22,7 +22,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_indonesia_islamic_finance_takaful_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Takaful Insurance Analytics: Product line combined ratio exceeds 100% — underwriting review needed',
     'Product line combined ratio exceeds 100% — underwriting review needed'
   );
@@ -41,7 +41,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_indonesia_islamic_finance_takaful_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Takaful Insurance Analytics: Large loss claim registered — retakaful notification required',
     'Large loss claim registered — retakaful notification required'
   );
