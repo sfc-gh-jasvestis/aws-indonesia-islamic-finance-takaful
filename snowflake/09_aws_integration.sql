@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 09_AWS_INTEGRATION.SQL — AWS services for Takaful Insurance Analytics
--- Account: 018437500440 | Region: ap-southeast-1
+-- Account: <YOUR_AWS_ACCOUNT_ID> | Region: ap-southeast-1
 -- Skip this script for Snowflake-only build
 -- ============================================================================
 USE DATABASE TAKAFUL_ANALYTICS;
@@ -65,12 +65,12 @@ $$;
 CREATE OR REPLACE STORAGE INTEGRATION aws_indonesia_islamic_finance_takaful_S3_INT
   TYPE = EXTERNAL_STAGE
   STORAGE_PROVIDER = 'S3'
-  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::018437500440:role/snowflake-sea-demos-s3'
+  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/snowflake-sea-demos-s3'
   ENABLED = TRUE
-  STORAGE_ALLOWED_LOCATIONS = ('s3://sea-aws-demos-018437500440/aws-indonesia-islamic-finance-takaful/');
+  STORAGE_ALLOWED_LOCATIONS = ('s3://<YOUR_S3_BUCKET>/aws-indonesia-islamic-finance-takaful/');
 
 -- External stage for data landing
 CREATE OR REPLACE STAGE RAW.LANDING_STAGE
   STORAGE_INTEGRATION = aws_indonesia_islamic_finance_takaful_S3_INT
-  URL = 's3://sea-aws-demos-018437500440/aws-indonesia-islamic-finance-takaful/';
+  URL = 's3://<YOUR_S3_BUCKET>/aws-indonesia-islamic-finance-takaful/';
 
