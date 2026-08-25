@@ -118,7 +118,7 @@ Industry research and Snowflake customer outcomes:
 - **Indonesia's Takaful industry assets reached Rp 45 trillion in 2023 with 15% CAGR** — [OJK](https://www.ojk.go.id/)
 - **Claims fraud costs the Indonesian insurance industry Rp 8-12 trillion annually** — [AAUI](https://aaui.or.id/)
 - **AI-powered fraud detection reduces fraudulent claims by 30-40%** — [McKinsey Insurance](https://www.mckinsey.com/industries/financial-services/our-insights)
-- **Automated reserving reduces actuarial processing time by 60%** — [Deloitte Actuarial](https://www2.deloitte.com/us/en/pages/financial-services/topics/actuarial-insurance-solutions.html)
+- **Automated reserving reduces actuarial processing time by 60%** — [Deloitte Actuarial](https://www.deloitte.com/us/en/Industries/financial-services/services/actuarial-insurance-solutions.html)
 - **Western Union** (Snowflake customer): processes 1B+ cross-border transactions on Snowflake with real-time compliance monitoring across 200+ countries -- [snowflake.com/customers/western-union](https://www.snowflake.com/en/customers/all-customers/case-study/western-union/)
 
 ## Key Demo Numbers
