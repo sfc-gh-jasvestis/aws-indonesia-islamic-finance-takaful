@@ -1,107 +1,79 @@
-# Demo Script: Takaful Insurance Analytics
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake delivers Takaful actuarial intelligence — Dynamic Tables aggregate claims and premiums in real-time, ML.FORECAST projects IBNR reserves, and Cortex AI generates underwriting risk assessments from policy documents"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Takaful Insurance Analytics
 
----
+**Indonesia - Islamic Finance**
+Use case: Takaful Insurance
 
-## Two Personas
+> Claims analytics and actuarial intelligence for Indonesia's Takaful insurance market — ML.FORECAST projects claims reserves, Dynamic Tables build real-time underwriting dashboards, and Cortex AI generates risk assessments.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Ir. Wahyu Hidayat** | Chief Actuary | React App (SPCS) | Claims reserves, combined ratio, surplus distribution, retakaful capacity |
-| **Siti Rahayu** | Claims Manager | Amazon QuickSight | Claims frequency, fraud detection, settlement turnaround, large loss events |
+## Why Snowflake
 
----
+Snowflake delivers Takaful actuarial intelligence — Dynamic Tables aggregate claims and premiums in real-time, ML.FORECAST projects IBNR reserves, and Cortex AI generates underwriting risk assessments from policy documents
 
-## What's Built
+- **ML.FORECAST for IBNR reserve projection** - Only demo using ML.FORECAST for Islamic insurance reserve estimation
+- **ML.ANOMALY_DETECTION for claims fraud** - Only demo detecting fraudulent Takaful claims patterns with ML
+- **Dynamic Tables for real-time combined ratio** - Maintains live actuarial KPIs without batch processing
+- **Indonesian Takaful context** - Surplus distribution, participant model, retakaful, OJK compliance
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `ID_ISLAMIC_FINANCE_TAKAFUL` |
+| Service | `ID_ISLAMIC_FINANCE_TAKAFUL_APP` |
+| Compute pool | `SEA_DEMOS_INDONESIA_POOL` |
+| Dimension table | `RAW.ACTUARIAL_STUDIES` (20 rows) |
+| Fact table | `RAW.CONTRIBUTIONS` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | IDR (Rp) |
+
+Regions in play: Jakarta, North Sumatra, Riau, East Kalimantan, Sulawesi
+Segments: Family Takaful, General Takaful, Health Takaful, Motor Takaful
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh ID_ISLAMIC_FINANCE_TAKAFUL
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 6 tables | POLICIES (200000), CLAIMS (80000), CONTRIBUTIONS (500000), UNDERWRITING_DOCS (100), ACTUARIAL_STUDIES (50), FRAUD_INDICATORS (20000) |
-| **CURATED** | 4 Dynamic Tables | CLAIMS_DASHBOARD, COMBINED_RATIO, IBNR_RESERVE, FRAUD_RISK_SCORE |
-| **ML** | ML.FORECAST + ML.ANOMALY_DETECTION | Forecasting + anomaly detection |
-| **AI** | COMPLETE, SUMMARIZE, AI_CLASSIFY | Classification + extraction |
-| **Search** | Cortex Search | 100 documents indexed |
-| **Agent** | TAKAFUL_INTELLIGENCE_AGENT | Semantic View + Search tools |
+| Gross Contributions | `Rp 14.2T` | total across Actuarial Studies |
+| Claims Ratio | `62%` | average per event |
+| Surplus Distributed | `Rp 1.8T` | total across Actuarial Studies |
+| Policies Active | `4.2M` | total across Actuarial Studies |
+| Loss Ratio Forecast | `64%` | average per event |
+| Reserve Adequacy | `112%` | average per event |
+| Persistency Rate | `84%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Takaful Overview
+2. Claims Analytics
+3. Actuarial Reserves
+4. Ask AI
+5. Architecture & Data
 
-Indonesia's Takaful insurance market is growing at 15% annually, but operators face rising claims frequency and sophisticated fraud attempts. A Chief Actuary managing Rp 8.5 trillion in contributions needs real-time claims visibility, ML-powered reserve projections, and AI-driven fraud detection — while ensuring surplus distribution to participants meets Shariah principles.
+## Talking points
 
----
+- **200,000 policies** - across general, family, and health Takaful
+- **Rp 8.5T** - annual contributions
+- **94.2%** - combined ratio (profitable)
+- **340 claims** - flagged for fraud investigation
+- **Rp 1.2T IBNR** - incurred but not reported reserve
 
-## Script
+## Business impact
 
-### [0:00–0:45] TAKAFUL OVERVIEW
-
-**Show**: Takaful Overview tab
-
-> "200,000 active policies across general, family, and health Takaful lines."
-
-**Action**: Point at 200K policies and Rp 8.5T contributions
-
-### [0:45–1:30] CLAIMS ANALYTICS
-
-**Show**: Claims Analytics tab
-
-> "80,000 claims processed — motor Takaful highest frequency at 12% of policies."
-
-**Action**: Show claims frequency by product line
-
-### [1:30–2:15] ACTUARIAL RESERVES
-
-**Show**: Actuarial Reserves tab
-
-> "IBNR reserve estimated at Rp 1.2 trillion — 8% above last quarter."
-
-**Action**: Show claims development triangle
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Wahyu asks: 'How much surplus is available for participant distribution?'"
-
-**Action**: Type surplus question
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "Six Snowflake capabilities, six AWS services."
-
-**Action**: Walk through architecture diagram
-
+- Indonesia's Takaful industry assets reached Rp 45 trillion in 2023 with 15% CAGR (OJK)
+- Claims fraud costs the Indonesian insurance industry Rp 8-12 trillion annually (AAUI)
+- AI-powered fraud detection reduces fraudulent claims by 30-40% (McKinsey Insurance)
+- Automated reserving reduces actuarial processing time by 60% (Deloitte Actuarial)
 
 ---
-
-## Key Demo Differentiators
-
-1. **ML.FORECAST for IBNR reserve projection** — Only demo using ML.FORECAST for Islamic insurance reserve estimation
-2. **ML.ANOMALY_DETECTION for claims fraud** — Only demo detecting fraudulent Takaful claims patterns with ML
-3. **Dynamic Tables for real-time combined ratio** — Maintains live actuarial KPIs without batch processing
-4. **Indonesian Takaful context** — Surplus distribution, participant model, retakaful, OJK compliance
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.RAW.POLICIES` → 200000
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.RAW.CLAIMS` → 80000
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.RAW.CONTRIBUTIONS` → 500000
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.ML.CLAIMS_RESERVE_FORECAST_RESULTS` → >0
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.ML.FRAUD_DETECTION_RESULTS WHERE IS_ANOMALY = TRUE` → >=300
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM TAKAFUL_ANALYTICS.AI.CLAIMS_CLASSIFICATION` → 80000
-
+Generated from `generator/demo_specs/aws-indonesia-islamic-finance-takaful.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-indonesia-islamic-finance-takaful` instead.
