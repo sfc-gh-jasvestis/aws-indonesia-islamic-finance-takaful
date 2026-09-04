@@ -54,6 +54,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="indonesia"
+            labels={{ entity: 'Product Lines', event: 'Contributions', alert: 'Claims' }}
             regions={data?.regions}
             markers={[{"label": "Jakarta", "value": "HQ: Rp 8.4T AUM", "color": "blue", "size": "lg"}, {"label": "Surabaya", "value": "Regional: Rp 2.1T", "color": "green", "size": "md"}, {"label": "Bandung", "value": "Branch network", "color": "green", "size": "md"}, {"label": "Medan", "value": "N.Sumatra hub", "color": "green", "size": "sm"}]}
             routes={[]}
@@ -84,8 +85,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: '#' },
           { key: 'name', header: 'Product Line' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Claims Ratio' },
-          { key: 'value', header: 'Contributions (Rp B)' },
+          { key: 'm1', header: 'Contributions (Rp B)' },
+          { key: 'm2', header: 'Loss Ratio Forecast' },
+          { key: 'm3', header: 'Persistency Rate' },
+          { key: 'events', header: 'Contributions' },
+          { key: 'alerts', header: 'Claims' },
         ]}
         data={data?.entities || []}
         title="Product Line Performance"
