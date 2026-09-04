@@ -54,6 +54,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="indonesia"
+            regions={data?.regions}
             markers={[{"label": "Jakarta", "value": "HQ: Rp 8.4T AUM", "color": "blue", "size": "lg"}, {"label": "Surabaya", "value": "Regional: Rp 2.1T", "color": "green", "size": "md"}, {"label": "Bandung", "value": "Branch network", "color": "green", "size": "md"}, {"label": "Medan", "value": "N.Sumatra hub", "color": "green", "size": "sm"}]}
             routes={[]}
             title="Geographic Overview"
@@ -70,7 +71,7 @@ export default function HomePage() {
           title="Contribution Growth (Quarterly)"
         />
         <Chart
-          data={data?.categories || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
+          data={data?.categoryMetric || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
           type="bar"
           xKey="category"
           yKeys={[{ key: 'count', name: 'Rp B' }]}
